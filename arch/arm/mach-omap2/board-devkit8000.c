@@ -57,6 +57,7 @@
 #include "hsmmc.h"
 #include "board-flash.h"
 #include "common-board-devices.h"
+#include "serial-beagle.h"
 
 #define	NAND_CS			0
 
@@ -595,45 +596,12 @@ static struct omap_board_mux board_mux[] __initdata = {
 	{ .reg_offset = OMAP_MUX_TERMINATOR },
 };
 
-static struct omap_device_pad uart3_pads[] __initdata = {
-{
-	.name = "uart3_cts_rctx.uart3_cts_rctx",
-	.enable = OMAP_PIN_INPUT_PULLUP | OMAP_MUX_MODE0,
-},
-{
-	.name = "uart3_rts_sd.uart3_rts_sd",
-	.enable = OMAP_PIN_OUTPUT | OMAP_MUX_MODE0,
-},
-{
-	.name = "uart3_tx_irtx.uart3_tx_irtx",
-	.enable = OMAP_PIN_OUTPUT | OMAP_MUX_MODE0,
-},
-{
-	.name = "uart3_rx_irrx.uart3_rx_irrx",
-	.flags = OMAP_DEVICE_PAD_REMUX | OMAP_DEVICE_PAD_WAKEUP,
-	.enable = OMAP_PIN_INPUT | OMAP_MUX_MODE0,
-	.idle = OMAP_PIN_INPUT | OMAP_MUX_MODE0,
-},
-};
-
-static inline void board_serial_init( void )
-{
-	struct omap_board_data uart3_bdata;
-	uart3_bdata.flags = 0;
-	uart3_bdata.pads = uart3_pads;
-	uart3_bdata.pads_cnt = ARRAY_SIZE(uart3_pads);
-	uart3_bdata.id = 2;
-	
-	omap_serial_init_port(&uart3_bdata, NULL);
-}
-#else
-#define board_serial_init omap_serial_init
 #endif
 
 static void __init devkit8000_init(void)
 {
 	omap3_mux_init(board_mux, OMAP_PACKAGE_CUS);
-	board_serial_init();
+	beagle_serial_init();
 	omap_sdrc_init(mt46h32m32lf6_sdrc_params,
 				  mt46h32m32lf6_sdrc_params);
 
