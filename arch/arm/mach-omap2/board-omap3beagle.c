@@ -56,6 +56,7 @@
 #include "pm.h"
 #include "board-flash.h"
 #include "common-board-devices.h"
+#include "serial-beagle.h"
 
 #define	NAND_CS	0
 
@@ -547,7 +548,7 @@ static void __init omap3_beagle_init(void)
 	if (gpio_is_valid(beagle_config.dvi_pd_gpio))
 		omap_mux_init_gpio(beagle_config.dvi_pd_gpio, OMAP_PIN_OUTPUT);
 	omap_display_init(&beagle_dss_data);
-	omap_serial_init();
+	beagle_serial_init();
 	omap_sdrc_init(mt46h32m32lf6_sdrc_params,
 				  mt46h32m32lf6_sdrc_params);
 
