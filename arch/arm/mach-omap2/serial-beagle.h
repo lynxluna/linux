@@ -15,7 +15,7 @@
 
 #include "serial.h"
 
-void __init beagle_serial_init( void );
+void __init beagle_serial_init(void);
 
 #endif
 

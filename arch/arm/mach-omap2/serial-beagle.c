@@ -44,7 +44,7 @@ static struct omap_device_pad beagle_uart3_pads[] __initdata = {
 },
 };
 
-void __init beagle_serial_init( void ) 
+void __init beagle_serial_init(void) 
 {
 	struct omap_board_data beagle_uart3_bdata;
 	beagle_uart3_bdata.flags = 0;
@@ -52,6 +52,6 @@ void __init beagle_serial_init( void )
 	beagle_uart3_bdata.pads_cnt = ARRAY_SIZE(beagle_uart3_pads);
 	beagle_uart3_bdata.id = 2;
 
-	omap_serial_init_port( &beagle_uart3_bdata, NULL );
+	omap_serial_init_port(&beagle_uart3_bdata, NULL);
 }
 
